@@ -1,0 +1,79 @@
+#Lista de dicionários cujo a função é armazenar todos os dados relevante do funcionario 
+funcionarios = [
+   {
+    'nome': 'Emily',
+    'vendas': 0,
+    'gerente': False
+  },
+  {
+    'nome': 'Larissa',
+    'vendas': 0,
+    'gerente': False
+  },
+  {
+    'nome': 'Rafael',
+    'vendas': 0,
+    'gerente': False,
+  },
+  {
+    'nome': 'Milena',
+    'vendas': 0,
+    'gerente': False,    
+  },
+  {
+    'nome': 'Jessica',
+    'vendas': 0,
+    'gerente': True,    
+  }  
+]
+#Define inicialmente o salario como zero
+total_salarios = 0
+#Função que calcula o valor de vendas, pega o valor que vai sendo colocado pelo usuario e armazena em uma variavel que vai ser retornada e depois printada.
+def calcula_total_vendas():
+  valor_final = 0
+  for i in range(len(funcionarios)):
+    valor_final += funcionarios[i]['vendas']  
+  return valor_final
+
+
+
+#Função que irá calcular a comissão caso o colaborador não seja gerente.
+def calcula_comissao(vendas: float):
+  comissao = 0
+  
+  if (vendas < 5000):
+    comissao = (0.01 * vendas) 
+  elif (5000 >= vendas <= 10000):
+     comissao = (0.015 * vendas)
+  else:
+    comissao = (0.02 * vendas)
+
+  return comissao
+
+#estrutura de repetição que irá andar por todos os itens 'vendas' do dicionario dentro da lista 'funcionarios'. 
+for i in range(len(funcionarios)):
+  f = funcionarios[i]
+#Também carrega uma condição que é "permitir" que o usuario coloque o valor de vendas apenas se não for gerente.
+  if f['gerente'] == False:
+    f['vendas'] = float(input("Digite o valor das vendas de {}: ".format(f['nome'])))
+#caso seja colaborador não gerente ele tras a função 'calcula_total_vendas()', armazena em 'total_vendas' e printa de um por um.
+total_vendas = calcula_total_vendas()
+print(f"Total de vendas: R$ {total_vendas:.2f}")
+#estrutura de repetição que também carrega uma condição caso o colaborador seja gerente. Aqui não existe nenhum input porque o calcúlo do gerente não necessita de nenhum número externo.
+#também tem os salários fixo e calculo em cima do total de faturamento e comissão.
+for i in range(len(funcionarios)):
+  f = funcionarios[i]
+  salario = 0
+  salario_gerente = (total_vendas * 0.05) + 2000
+  5
+  if (f['gerente'] == True):
+    salario = salario_gerente
+  else:
+    salario = calcula_comissao(f['vendas']) + 1000
+     
+  total_salarios += salario
+  print(f"O salário de {f['nome']} é R${salario:.2f}")
+
+  
+
+print(f'\n Total salários pagos: R$ {total_salarios:.2f}')
